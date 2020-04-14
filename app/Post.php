@@ -15,4 +15,20 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * The comments that belong to the post.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'comments')->withPivot('comment');
+    }
+
+    /**
+     * The comments that belong to the post.
+     */
+    public function likes()
+    {
+        return $this->belongsToMany('App\User', 'likes');
+    }
 }

@@ -1,0 +1,14 @@
+<svg width="286" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+ <defs>
+  <style type="text/css">#holder_171178f4ba3 text { fill:rgba(255,255,255,.75);font-weight:normal;font-family:Helvetica, monospace;font-size:14pt }</style>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_6" height="296" width="465" y="-58.5" x="-78.5" stroke-width="1.5" stroke="#000" fill="#7f7f7f"/>
+  <text stroke="#ffffff" transform="matrix(1.258585810661316,0,0,1.3333333730697632,-9.696967899799347,-18.500002205371857) " xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="24" id="svg_8" y="89.476559" x="101.995507" stroke-width="0" fill="#f7f7f7">File</text>
+ </g>
+</svg>

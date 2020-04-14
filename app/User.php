@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'bio', 'avatar', 'password',
     ];
 
     /**
@@ -42,6 +42,39 @@ class User extends Authenticatable
      */
     public function posts()
     {
-        return $this->belongsToMany('App\Post');
+        return $this->hasMany('App\Post');
     }
+
+    /**
+     * The comments that belong to the user.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'comments')->withPivot('comment');
+    }
+
+    /**
+     * The comments that belong to the post.
+     */
+    public function likes()
+    {
+        return $this->belongsToMany('App\Post', 'likes');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followers()
+    {
+        return $this->belongsToMany('App\User', 'followers', 'leader_id', 'follower_id')->withTimestamps();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followings()
+    {
+        return $this->belongsToMany('App\User', 'followers', 'follower_id', 'leader_id')->withTimestamps();
+    }
+
 }

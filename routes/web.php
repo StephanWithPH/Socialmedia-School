@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@loadHomePage');
+Route::get('/home', 'HomeController@loadHomePage')->name('home');
+
+Route::get('/profile', 'ProfileController@loadProfilePage')->middleware(['auth']);
+Route::get('/wall', 'WallController@loadWallPage')->middleware(['auth']);
+
+
+Route::get('/logout', 'Auth\LoginController@logout')->middleware(['auth']);
+Auth::routes();
