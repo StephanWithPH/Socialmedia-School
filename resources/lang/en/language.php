@@ -32,5 +32,8 @@ return [
 
     /* Profile page */
     'profile' => 'profile',
-
+    'noaccess' => 'You do not have access to this page!',
+    'somethingwrong' => 'Something went wrong!',
+    'successfuledit' => 'Successfully edited the profile!',
+    'nopostsprofile' => 'This profile has no public posts!',
 ];

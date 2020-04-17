@@ -14,10 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@loadHomePage');
-Route::get('/home', 'HomeController@loadHomePage')->name('home');
+/*Route::get('/home', 'HomeController@loadHomePage')->name('home');*/
 
-Route::get('/profile', 'ProfileController@loadProfilePage')->middleware(['auth']);
+Route::get('/@{username}', 'ProfileController@loadProfilePage')->middleware(['auth']);
+Route::get('/@{username}/edit', 'ProfileController@loadEditProfilePage')->middleware(['auth']);
+Route::post('/profile/edit/submit', 'ProfileController@submitEditProfile')->middleware(['auth']);
+
+Route::get('/profile/img/{id}', 'ProfileController@loadProfileAvatar')->middleware(['auth']);
+
 Route::get('/wall', 'WallController@loadWallPage')->middleware(['auth']);
+Route::post('/wall/create', 'WallController@createPost')->middleware(['auth']);
 
 
 Route::get('/logout', 'Auth\LoginController@logout')->middleware(['auth']);

@@ -14,6 +14,12 @@ class WallController extends Controller
 
     public function loadWallPage()
     {
-        return view('pages.home');
+        return view('pages.wall');
+    }
+
+    public function createPost()
+    {
+        flash('Successfully created post!')->success();
+        return redirect()->back();
     }
 }

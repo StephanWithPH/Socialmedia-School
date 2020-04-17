@@ -15,7 +15,7 @@
                     <a class="nav-link text-center" href="{{ action('WallController@loadWallPage') }}"><h4 class="mb-0"><i class="fas fa-stream"></i></h4>{{ __('language.wall') }}</a>
                 </li>
                 <li class="nav-item mr-2 ml-2">
-                    <a class="nav-link text-center" href="{{ action('ProfileController@loadProfilePage') }}"><h4 class="mb-0"><i class="fas fa-user"></i></h4>{{ __('language.profile') }}</a>
+                    <a class="nav-link text-center" href="{{ action('ProfileController@loadProfilePage', ['username' => \Illuminate\Support\Facades\Auth::user()->username]) }}"><h4 class="mb-0"><i class="fas fa-user"></i></h4>{{ __('language.profile') }}</a>
                 </li>
             @endif
         </ul>
