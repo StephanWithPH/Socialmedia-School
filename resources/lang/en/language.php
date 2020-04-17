@@ -29,6 +29,9 @@ return [
 
     /* Wall page */
     'wall' => 'wall',
+    'enterposttext' => 'Enter a text to caption your post!',
+    'createpost' => 'Create post',
+    'nopostsfound' => 'No posts found on your wall :( Maybe start following friends!',
 
     /* Profile page */
     'profile' => 'profile',
@@ -36,4 +39,5 @@ return [
     'somethingwrong' => 'Something went wrong!',
     'successfuledit' => 'Successfully edited the profile!',
     'nopostsprofile' => 'This profile has no public posts!',
+
 ];
