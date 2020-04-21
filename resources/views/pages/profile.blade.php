@@ -26,6 +26,15 @@
                         <a class="btn btn-outline-primary text-primary" href="{{ action('ProfileController@loadEditProfilePage', \Illuminate\Support\Facades\Auth::user()->username) }}">Edit profile</a>
                     </div>
                 @else
+                    @if(!\Illuminate\Support\Facades\Auth::user()->followings->contains($userProfile->id))
+                        <div class="col-md-6 col-12 text-md-right">
+                            <a class="btn btn-primary text-white" href="{{ action('ProfileController@followProfile', $userProfile->username) }}">Follow</a>
+                        </div>
+                    @else
+                        <div class="col-md-6 col-12 text-md-right">
+                            <a class="btn btn-outline-primary text-primary" href="{{ action('ProfileController@unfollowProfile', $userProfile->username) }}">Unfollow</a>
+                        </div>
+                    @endif
                     {{-- Check here if the user is followed or not and place the correct button --}}
                 @endif
             @endif

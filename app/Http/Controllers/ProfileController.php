@@ -32,7 +32,7 @@ class ProfileController extends Controller
         else{
             // Return back to previous page because of no access
             flash(__('language.noaccess'))->error();
-            return redirect()->back();
+            return redirect()->action('WallController@loadWallPage');
         }
     }
 
@@ -78,7 +78,43 @@ class ProfileController extends Controller
     public function loadProfileAvatar($id){
         $user = User::find($id);
         if ($user->avatar != null){
-            return response()->download(storage_path("app/". $user->avatar));
+            $image = Storage::get($user->avatar);
+            $type = Storage::mimeType($user->avatar);
+            return response()->make($image, 200, ['content-type' => $type]);
         }
     }
+
+    public function followProfile($username){
+        $userProfile = User::where('username', $username)->first();
+        if (Auth::user()->username != $username){
+            if (!\Illuminate\Support\Facades\Auth::user()->followings->contains($userProfile->id)){
+                Auth::user()->followings()->attach($userProfile);
+                Auth::user()->save();
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function unfollowProfile($username){
+        $userProfile = User::where('username', $username)->first();
+        if (Auth::user()->username != $username){
+            if (\Illuminate\Support\Facades\Auth::user()->followings->contains($userProfile->id)){
+                Auth::user()->followings()->detach($userProfile);
+                Auth::user()->save();
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function loadFollowersPage($username){
+        $userProfile = User::where('username', $username)->first();
+        return view('pages.followers', compact('userProfile'));
+    }
+
+    public function loadFollowingPage($username){
+        $userProfile = User::where('username', $username)->first();
+        return view('pages.followers', compact('userProfile'));
+    }
+
+
 }
