@@ -18,10 +18,19 @@
                     <div class="card-body w-100">
                         <form method="POST" action="{{action('WallController@createPost')}}" class="fileupload" enctype="multipart/form-data">
                             @csrf
-                            <input name="fileuploaded" type="file" class="dropify" data-height="200" />
 
                             <div class="form-group w-100">
+                                <div>
+                                    <input id="uploadedimage" type="file" class="dropify form-control @error('uploadedimage') is-invalid @enderror" name="uploadedimage" autocomplete="uploadedimage">
+                                    @error('uploadedimage')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
+                            <div class="form-group w-100">
                                 <div class="mt-2">
                                     <textarea style="height:200px" id="uploadedfiletext" type="textarea" class="form-control @error('uploadedfiletext') is-invalid @enderror" name="uploadedfiletext" value="{{ old('uploadedfiletext') }}" autocomplete="uploadedfiletext" autofocus placeholder="{{ __('language.enterposttext') }}"></textarea>
 
@@ -53,13 +62,14 @@
                     @endphp
                     <div class="col-md-7 col-12 mb-2">
                         <div class="card w-100">
-                            <a class="mt-4 ml-4 mb-4">{{ $user->username }}</a>
-                            <img class="card-img-top" src="https://www.w3schools.com/w3css/img_lights.jpg" alt="Card image cap">
+                            <a class="mt-4 ml-4 mb-4" href="{{ action('ProfileController@loadProfilePage', $user->username) }}">{{ $user->username }} @if($user->verified)<img src="{{ asset('img/imagecheck.svg') }}" style="height: 15px"/>@endif</a>
+                            <img class="card-img-top w-100" src="{{action('WallController@loadPostImage', $post->id)}}" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Like</a>
-                                <a href="#" class="btn btn-danger">Comment</a>
+                                <p class="card-text">{{ $post->text }}</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <a href="#" class="text-primary mr-1" style="font-size: 30px;">@if(true)<i class="far fa-heart"></i>@else<i class="fas fa-heart"></i>@endif</a>
+                                <a href="#" class="text-dark ml-1" style="font-size: 30px;"><i class="far fa-comment"></i></a>
                             </div>
                         </div>
                     </div>

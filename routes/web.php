@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@loadHomePage');
 Route::get('/@{username}', 'ProfileController@loadProfilePage');
 Route::get('/@{username}/edit', 'ProfileController@loadEditProfilePage')->middleware(['auth']);
 Route::get('/@{username}/followers', 'ProfileController@loadFollowersPage')->middleware(['auth']);
-Route::get('/@{username}/following', 'ProfileController@loadFollowingPage')->middleware(['auth']);
+Route::get('/@{username}/followings', 'ProfileController@loadFollowingsPage')->middleware(['auth']);
 
 Route::get('/wall', 'WallController@loadWallPage')->middleware(['auth']);
 
@@ -32,6 +32,7 @@ Route::post('/wall/create', 'WallController@createPost')->middleware(['auth']);
 
 /* Getting images */
 Route::get('/profile/img/{id}', 'ProfileController@loadProfileAvatar');
+Route::get('/post/img/{id}', 'WallController@loadPostImage');
 
 
 Route::get('/logout', 'Auth\LoginController@logout')->middleware(['auth']);

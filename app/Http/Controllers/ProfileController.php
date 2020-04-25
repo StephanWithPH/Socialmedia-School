@@ -111,9 +111,9 @@ class ProfileController extends Controller
         return view('pages.followers', compact('userProfile'));
     }
 
-    public function loadFollowingPage($username){
+    public function loadFollowingsPage($username){
         $userProfile = User::where('username', $username)->first();
-        return view('pages.followers', compact('userProfile'));
+        return view('pages.followings', compact('userProfile'));
     }
 
 

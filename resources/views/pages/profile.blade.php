@@ -14,10 +14,17 @@
         <div class="row">
             <div class="col-md-6 col-12 mt-5">
                 <div class="mt-5">
-                    <h4 class="font-weight-bold mb-0">{{ $userProfile->name }}</h4>
+                    <h4 class="font-weight-bold mb-0">{{ $userProfile->name }} @if($userProfile->verified)<img src="{{ asset('img/imagecheck.svg') }}" style="height: 20px"/>@endif</h4>
                     <h6 class="text-muted mb-3">&commat;{{ $userProfile->username }}</h6>
                     <p class="mb-1">@if( $userProfile->bio ) {{ $userProfile->bio }} @endif</p>
-                    <p><strong>{{$userProfile->followers()->count() }}</strong> <span class="text-muted">followers</span> <strong class="ml-3">{{ $userProfile->followings()->count() }}</strong> <span class="text-muted">following</span></p>
+                    <p>
+                        <a href="{{ action('ProfileController@loadFollowersPage', $userProfile->username) }}">
+                            <strong>{{$userProfile->followers()->count() }}</strong> <span class="text-muted">followers</span>
+                        </a>
+                        <a href="{{ action('ProfileController@loadFollowingsPage', $userProfile->username) }}">
+                            <strong class="ml-3">{{ $userProfile->followings()->count() }}</strong> <span class="text-muted">following</span>
+                        </a>
+                    </p>
                 </div>
             </div>
             @if(\Illuminate\Support\Facades\Auth::check())
@@ -42,9 +49,11 @@
         @include('flash::message')
         <hr/>
         <div class="row">
-            @forelse($userProfile->posts() as $post)
+            @forelse($userProfile->posts as $post)
                 <div class="col-md-3 col-4 p-1">
-                    <img src="{{asset('img/default-avatar.png')}}" class="w-100"/>
+                    <div class="image w-100 position-relative overflow-hidden" style="padding-bottom: 100%;">
+                        <img src="{{action('WallController@loadPostImage', $post->id)}}" class="w-100 img-fluid position-absolute"/>
+                    </div>
                 </div>
             @empty
                 <div class="col">
