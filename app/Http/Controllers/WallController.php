@@ -43,7 +43,7 @@ class WallController extends Controller
         $post->save();
 
         flash('Successfully created post!')->success();
-        return redirect()->back();
+        return redirect()->action('WallController@loadPostDetailsPage', $post->id);
     }
 
     public function loadPostImage($id){
@@ -53,5 +53,24 @@ class WallController extends Controller
             $type = Storage::mimeType($post->image);
             return response()->make($image, 200, ['content-type' => $type]);
         }
+    }
+
+    public function likePost(Request $request){
+        $post = Post::find($request->id);
+
+        if (!Auth::user()->likes->contains($post)){
+            Auth::user()->likes()->attach($post);
+            return response()->json(['success'=>'Successfully liked post', 'type'=>'like']);
+        }
+        else {
+            Auth::user()->likes()->detach($post);
+            return response()->json(['success'=>'Successfully unliked post', 'type'=>'unlike']);
+        }
+    }
+
+    public function loadPostDetailsPage($id){
+        $post = Post::find($id);
+
+        return view('pages.postdetails', compact('post'));
     }
 }

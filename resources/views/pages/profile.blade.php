@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1 class="display-4 text-white font-weight-bold position-relative" style="top:100px"><img src="@if( $userProfile->avatar ){{action('ProfileController@loadProfileAvatar', $userProfile->id)}}@else{{asset('img/default-avatar.png')}}@endif" class="rounded-circle border" height="200px" width="200px"/></h1>
+                    <h1 class="display-4 text-white font-weight-bold position-relative" style="top:100px"><img src="@if( $userProfile->avatar ){{action('ProfileController@loadProfileAvatar', $userProfile->id)}}@else{{asset('img/default-avatar.png')}}@endif" class="rounded-circle border bg-white" height="200px" width="200px"/></h1>
                 </div>
             </div>
         </div>
@@ -51,9 +51,13 @@
         <div class="row">
             @forelse($userProfile->posts as $post)
                 <div class="col-md-3 col-4 p-1">
-                    <div class="image w-100 position-relative overflow-hidden" style="padding-bottom: 100%;">
-                        <img src="{{action('WallController@loadPostImage', $post->id)}}" class="w-100 img-fluid position-absolute"/>
-                    </div>
+                    <a href="#">
+                        <div class="image w-100 position-relative overflow-hidden" style="padding-bottom: 100%;">
+                            <a href="{{ action('WallController@loadPostDetailsPage', $post->id) }}">
+                                <img src="{{action('WallController@loadPostImage', $post->id)}}" class="w-100 img-fluid position-absolute"/>
+                            </a>
+                        </div>
+                    </a>
                 </div>
             @empty
                 <div class="col">

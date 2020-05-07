@@ -33,11 +33,24 @@ return [
     'createpost' => 'Create post',
     'nopostsfound' => 'No posts found on your wall :( Maybe start following friends!',
 
+    /* Post details page */
+    'postdetails' => 'Post details',
+
+    /* Explore page */
+    'explore' => 'explore',
+    'explorecaps' => 'Explore',
+    'noresults' => 'No search results found',
+
     /* Profile page */
     'profile' => 'profile',
     'noaccess' => 'You do not have access to this page!',
     'somethingwrong' => 'Something went wrong!',
     'successfuledit' => 'Successfully edited the profile!',
     'nopostsprofile' => 'This profile has no public posts!',
+
+    /* Comments */
+    'createcomment' => 'Place comment',
+    'entercommenttext' => 'Please enter the text to comment',
+
 
 ];

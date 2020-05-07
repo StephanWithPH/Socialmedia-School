@@ -5,64 +5,32 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1 class="display-4 text-white font-weight-bold">{{ \Illuminate\Support\Facades\Auth::user()->username }}'s wall</h1>
+                    <h1 class="display-4 text-white font-weight-bold">{{ __('language.explorecaps') }}</h1>
                 </div>
             </div>
         </div>
     </div>
     <div class="container mt-4">
         @include('flash::message')
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-7 col-12">
-                <div class="card w-100">
-                    <div class="card-body w-100">
-                        <form method="POST" action="{{action('WallController@createPost')}}" class="fileupload" enctype="multipart/form-data">
-                            @csrf
-
-                            <div class="form-group w-100">
-                                <div>
-                                    <input id="uploadedimage" type="file" class="dropify form-control @error('uploadedimage') is-invalid @enderror" name="uploadedimage" autocomplete="uploadedimage">
-                                    @error('uploadedimage')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group w-100">
-                                <div class="mt-2">
-                                    <textarea style="height:200px" id="uploadedfiletext" type="textarea" class="form-control @error('uploadedfiletext') is-invalid @enderror" name="uploadedfiletext" value="{{ old('uploadedfiletext') }}" autocomplete="uploadedfiletext" autofocus placeholder="{{ __('language.enterposttext') }}"></textarea>
-
-                                    @error('uploadedfiletext')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="text-right">
-                                <input type="submit" class="btn btn-primary text-white text-right" value="{{ __('language.createpost') }}"/>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
+        <div class="row d-flex justify-content-center mt-2">
+            <div class="col-md-7 col-12 mb-2">
+                <input type="text" name="usernamesearch" class="form-control form-control-lg" id="usernamesearch"/>
             </div>
+        </div>
+        <div class="searchresults">
+
         </div>
         <div class="row d-flex justify-content-center mt-2">
             @php
                 $postsfound = false;
             @endphp
-            @forelse(\Illuminate\Support\Facades\Auth::user()->followings as $user )
-                @forelse($user->posts()->orderBy('created_at','DESC')->limit(4)->get() as $post)
+                @forelse(\App\Post::orderBy('created_at','DESC')->limit(50)->get() as $post)
                     @php
                         $postsfound = true;
                     @endphp
                     <div class="col-md-7 col-12 mb-2">
                         <div class="card w-100">
-                            <a class="mt-4 ml-4 mb-4" href="{{ action('ProfileController@loadProfilePage', $user->username) }}">{{ $user->username }} @if($user->verified)<img src="{{ asset('img/imagecheck.svg') }}" style="height: 15px"/>@endif</a>
+                            <a class="mt-4 ml-4 mb-4" href="{{ action('ProfileController@loadProfilePage', $post->user->username) }}">{{ $post->user->username }} @if($post->user->verified)<img src="{{ asset('img/imagecheck.svg') }}" style="height: 15px"/>@endif</a>
                             <a href="{{ action('WallController@loadPostDetailsPage', $post->id) }}"><img class="card-img-top w-100" src="{{action('WallController@loadPostImage', $post->id)}}" alt="Card image cap"/></a>
                             <div class="card-body">
                                 <p class="card-text">{!! strip_tags(preg_replace('/(?<!\S)#([0-9a-zA-Z]+)/', '<a href="/hashtag/$1">#$1</a>', preg_replace('/(?<!\S)@([0-9a-zA-Z]+)/', '<a href="/@$1">@$1</a>', $post->text)), '<a>') !!}</p>
@@ -75,8 +43,6 @@
                     </div>
                     @empty
                 @endforelse
-            @empty
-            @endforelse
             @if(!$postsfound)
                 <div class="col-md-7 col-12 mb-2">
                     <div class="card w-100">
@@ -123,5 +89,31 @@
                 }
             });
         });
+
+        $(document).ready(function(){
+            $('#usernamesearch').on('keyup paste',username_check);
+        });
+
+        function username_check(){
+            var username = $('#usernamesearch').val();
+            if(username == "") {
+            }
+            else {
+                $.ajax({
+                    type:'POST',
+                    url:'/search/username',
+                    data:{username:username},
+                    success:function(data){
+                        if (data.length == 0){
+                            noResults();
+                        }
+                        else{
+                            $('.searchresults').html("");
+                            $('.searchresults').html(data);
+                        }
+                    }
+                });
+            }
+        }
     </script>
 @endsection

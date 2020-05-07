@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1 class="display-4 text-white font-weight-bold position-relative" style="top:100px"><img src="@if( $userProfile->avatar ) {{action('ProfileController@loadProfileAvatar', $userProfile->id)}} @else {{ asset('img/default-avatar.png') }} @endif" class="rounded-circle border" height="200px" width="200px"/></h1>
+                    <h1 class="display-4 text-white font-weight-bold position-relative" style="top:100px"><img src="@if( $userProfile->avatar ) {{action('ProfileController@loadProfileAvatar', $userProfile->id)}} @else {{ asset('img/default-avatar.png') }} @endif" class="rounded-circle border bg-white" height="200px" width="200px"/></h1>
                 </div>
             </div>
         </div>

@@ -14,23 +14,32 @@
         @include('flash::message')
             @forelse($userProfile->followers as $follower)
                 <div class="row mt-2 mb-2">
-                    <div class="col-2 vertical-center" style="height: 7vh;">
-                        <a class="text-primary font-weight-bold h-100" href="{{ action('ProfileController@loadProfilePage', $follower->username) }}"><img src="@if( $follower->avatar ){{action('ProfileController@loadProfileAvatar', $follower->id)}}@else{{asset('img/default-avatar.png')}}@endif" class="rounded-circle border h-100"/></a>
-                    </div>
-                    <div class="col vertical-center" style="height: 7vh">
-                        <a class="text-primary font-weight-bold" href="{{ action('ProfileController@loadProfilePage', $follower->username) }}">{{ $follower->username }}</a>
-                    </div>
-                    @if(\Illuminate\Support\Facades\Auth::check())
-                        @if(!\Illuminate\Support\Facades\Auth::user()->followings->contains($follower->id))
-                            <div class="col text-right vertical-center" style="height: 7vh;">
-                                <a class="btn btn-primary text-white ml-auto" href="{{ action('ProfileController@followProfile', $follower->username) }}">Follow</a>
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body w-100">
+                                <div class="row">
+                                    <div class="col-4 vertical-center" style="height: 7vh;">
+                                        <a class="text-primary font-weight-bold h-100" href="{{ action('ProfileController@loadProfilePage', $follower->username) }}"><img src="@if( $follower->avatar ){{action('ProfileController@loadProfileAvatar', $follower->id)}}@else{{asset('img/default-avatar.png')}}@endif" class="rounded-circle border h-100 bg-white"/></a>
+                                    </div>
+                                    <div class="col-4 vertical-center" style="height: 7vh">
+                                        <a class="text-primary font-weight-bold" href="{{ action('ProfileController@loadProfilePage', $follower->username) }}">{{ $follower->username }}</a>
+                                    </div>
+                                    @if(\Illuminate\Support\Facades\Auth::check())
+                                        @if(!\Illuminate\Support\Facades\Auth::user()->followings->contains($follower->id))
+                                            <div class="col-4 text-right vertical-center" style="height: 7vh;">
+                                                <a class="btn btn-primary text-white ml-auto" href="{{ action('ProfileController@followProfile', $follower->username) }}">Follow</a>
+                                            </div>
+                                        @else
+                                            <div class="col-4 text-right vertical-center" style="height: 7vh;">
+                                                <a class="btn btn-outline-primary text-primary ml-auto" href="{{ action('ProfileController@unfollowProfile', $follower->username) }}">Unfollow</a>
+                                            </div>
+                                        @endif
+                                    @endif
+                                </div>
                             </div>
-                        @else
-                            <div class="col text-right vertical-center" style="height: 7vh;">
-                                <a class="btn btn-outline-primary text-primary ml-auto" href="{{ action('ProfileController@unfollowProfile', $follower->username) }}">Unfollow</a>
-                            </div>
-                        @endif
-                    @endif
+                        </div>
+                    </div>
+
                 </div>
                 @empty
                 <div class="row">

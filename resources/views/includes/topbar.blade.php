@@ -17,6 +17,9 @@
                 <li class="nav-item mr-2 ml-2">
                     <a class="nav-link text-center" href="{{ action('ProfileController@loadProfilePage', ['username' => \Illuminate\Support\Facades\Auth::user()->username]) }}"><h4 class="mb-0"><i class="fas fa-user"></i></h4>{{ __('language.profile') }}</a>
                 </li>
+                <li class="nav-item mr-2 ml-2">
+                    <a class="nav-link text-center" href="{{ action('ExploreController@loadExplorePage') }}"><h4 class="mb-0"><i class="fas fa-compass"></i></h4>{{ __('language.explore') }}</a>
+                </li>
             @endif
         </ul>
         <ul class="navbar-nav ml-auto">

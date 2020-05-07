@@ -21,7 +21,7 @@ class Post extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Comment', 'comments')->withPivot('comment');
+        return $this->hasMany('App\Comment');
     }
 
     /**
