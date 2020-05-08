@@ -30,7 +30,7 @@
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 <script>
-    $(window).load(function() {
+    $( document ).ready(function() {
         $('.preloader').fadeOut(500);
         $('body').removeClass('loading');
     });

@@ -5,7 +5,7 @@
                 <div class="card-body w-100">
                     <div class="row">
                         <div class="col-4 col-md vertical-center" style="height: 7vh;">
-                            <a class="text-primary font-weight-bold h-100" href="{{ action('ProfileController@loadProfilePage', $user->username) }}"><img src="@if( $user->avatar ){{action('ProfileController@loadProfileAvatar', $user->id)}}@else{{asset('img/default-avatar.png')}}@endif" class="rounded-circle border h-100 bg-white"/></a>
+                            <a class="text-primary font-weight-bold h-100" href="{{ action('ProfileController@loadProfilePage', $user->username) }}"><img src="@if( $user->avatar ){{action('ProfileController@loadProfileAvatar', $user->id)}}@else{{asset('img/default-avatar.png')}}@endif" class="rounded-circle border bg-white" style="object-fit: cover;" width="80px" height="80px"/></a>
                         </div>
                         <div class="col-4 vertical-center" style="height: 7vh">
                             <a class="text-primary font-weight-bold" href="{{ action('ProfileController@loadProfilePage', $user->username) }}">{{ $user->username }}</a>
