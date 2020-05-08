@@ -30,13 +30,13 @@ Route::get('/explore', 'ExploreController@loadExplorePage')->middleware(['auth']
 Route::get('/@{username}/follow', 'ProfileController@followProfile')->middleware(['auth']);
 Route::get('/@{username}/unfollow', 'ProfileController@unfollowProfile')->middleware(['auth']);
 Route::post('/profile/edit/submit', 'ProfileController@submitEditProfile')->middleware(['auth']);
-Route::post('/wall/create', 'WallController@createPost')->middleware(['auth']);
+Route::post('/wall/create', 'WallController@createPost')->middleware(['auth', 'optimizeImages']);
 Route::post('/comment/create', 'CommentController@createComment')->middleware(['auth']);
-Route::post('/search/username', 'ExploreController@searchByUsername');/*->middleware(['auth']);*/
+Route::post('/search/username', 'ExploreController@searchByUsername')->middleware(['auth']);
 
 /* Liking and unliking posts */
-Route::post('/post/like', 'Wallcontroller@likePost')->middleware(['auth']);
-Route::post('/post/unlike', 'Wallcontroller@unlikePost')->middleware(['auth']);
+Route::post('/post/like', 'WallController@likePost')->middleware(['auth']);
+Route::post('/post/unlike', 'WallController@unlikePost')->middleware(['auth']);
 
 /* Getting images */
 Route::get('/profile/img/{id}', 'ProfileController@loadProfileAvatar');

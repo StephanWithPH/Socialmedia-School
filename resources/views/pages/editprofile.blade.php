@@ -2,10 +2,10 @@
 @section('title', "SocialHub | Edit profile")
 @section('body')
     <div class="img-fluid w-100 vertical-center text-center" style="background-image: url('{{ asset('img/banner-home.jpg') }}'); height: 20vh">
-        <div class="container">
+        <div class="container position-relative" style="top:10vh">
             <div class="row">
                 <div class="col">
-                    <h1 class="display-4 text-white font-weight-bold position-relative" style="top:100px"><img src="@if( $userProfile->avatar ) {{action('ProfileController@loadProfileAvatar', $userProfile->id)}} @else {{ asset('img/default-avatar.png') }} @endif" class="rounded-circle border bg-white" height="200px" width="200px"/></h1>
+                    <h1 class="display-4 text-white font-weight-bold"><img src="@if( $userProfile->avatar ) {{action('ProfileController@loadProfileAvatar', $userProfile->id)}} @else {{ asset('img/default-avatar.png') }} @endif" class="rounded-circle border bg-white" height="200px" width="200px"/></h1>
                 </div>
             </div>
         </div>

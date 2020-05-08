@@ -1,12 +1,11 @@
 @extends('app')
 @section('title', "SocialHub | Home")
 @section('body')
-<div class="img-fluid w-100 vertical-center" style="background-image: url('{{ asset('img/banner-home.jpg') }}'); height: 70vh">
+<div class="img-fluid w-100 vertical-center" style="background-image: url('{{ asset('img/banner-home.jpg') }}'); height: 100vh">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-12 text-center text-lg-left">
                 <h1 class="display-4 text-white font-weight-bold">{{ __('language.displaytitle') }}</h1>
-                <a href="https://github.com/StephanWithPH/Socialmedia-School" class="btn btn-light btn-lg">{{ __('language.github') }}</a>
             </div>
             <div class="col-lg-6 col-12 text-center text-lg-left">
                 <div class="card" style="width: 100%;">

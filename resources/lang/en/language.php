@@ -40,6 +40,7 @@ return [
     'explore' => 'explore',
     'explorecaps' => 'Explore',
     'noresults' => 'No search results found',
+    'searchplaceholder' => 'Search for users by username...',
 
     /* Profile page */
     'profile' => 'profile',

@@ -14,7 +14,7 @@
         @include('flash::message')
         <div class="row d-flex justify-content-center mt-2">
             <div class="col-md-7 col-12 mb-2">
-                <input type="text" name="usernamesearch" class="form-control form-control-lg" id="usernamesearch"/>
+                <input type="text" name="usernamesearch" class="form-control form-control-lg" id="usernamesearch" placeholder="{{ __('language.searchplaceholder') }}"/>
             </div>
         </div>
         <div class="searchresults">
@@ -24,7 +24,7 @@
             @php
                 $postsfound = false;
             @endphp
-                @forelse(\App\Post::orderBy('created_at','DESC')->limit(50)->get() as $post)
+                @forelse(\App\Post::orderBy('created_at','DESC')->limit(20)->get() as $post)
                     @php
                         $postsfound = true;
                     @endphp
@@ -76,7 +76,7 @@
 
             $.ajax({
                 type:'POST',
-                url:'/post/like',
+                url:'{{ action('WallController@likePost') }}',
                 data:{id:id},
 
                 success:function(data){
@@ -101,16 +101,11 @@
             else {
                 $.ajax({
                     type:'POST',
-                    url:'/search/username',
+                    url:'{{ action('ExploreController@searchByUsername') }}',
                     data:{username:username},
                     success:function(data){
-                        if (data.length == 0){
-                            noResults();
-                        }
-                        else{
-                            $('.searchresults').html("");
-                            $('.searchresults').html(data);
-                        }
+                        $('.searchresults').html("");
+                        $('.searchresults').html(data);
                     }
                 });
             }

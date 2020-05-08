@@ -90,7 +90,7 @@
 
             $.ajax({
                 type:'POST',
-                url:'/post/like',
+                url:'{{ action('WallController@likePost') }}',
                 data:{id:id},
 
                 success:function(data){

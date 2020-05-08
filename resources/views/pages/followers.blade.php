@@ -25,14 +25,16 @@
                                         <a class="text-primary font-weight-bold" href="{{ action('ProfileController@loadProfilePage', $follower->username) }}">{{ $follower->username }}</a>
                                     </div>
                                     @if(\Illuminate\Support\Facades\Auth::check())
-                                        @if(!\Illuminate\Support\Facades\Auth::user()->followings->contains($follower->id))
-                                            <div class="col-4 text-right vertical-center" style="height: 7vh;">
-                                                <a class="btn btn-primary text-white ml-auto" href="{{ action('ProfileController@followProfile', $follower->username) }}">Follow</a>
-                                            </div>
-                                        @else
-                                            <div class="col-4 text-right vertical-center" style="height: 7vh;">
-                                                <a class="btn btn-outline-primary text-primary ml-auto" href="{{ action('ProfileController@unfollowProfile', $follower->username) }}">Unfollow</a>
-                                            </div>
+                                        @if(\Illuminate\Support\Facades\Auth::user()->username != $follower->username)
+                                            @if(!\Illuminate\Support\Facades\Auth::user()->followings->contains($follower->id))
+                                                <div class="col-4 text-right vertical-center" style="height: 7vh;">
+                                                    <a class="btn btn-primary text-white ml-auto" href="{{ action('ProfileController@followProfile', $follower->username) }}">Follow</a>
+                                                </div>
+                                            @else
+                                                <div class="col-4 text-right vertical-center" style="height: 7vh;">
+                                                    <a class="btn btn-outline-primary text-primary ml-auto" href="{{ action('ProfileController@unfollowProfile', $follower->username) }}">Unfollow</a>
+                                                </div>
+                                            @endif
                                         @endif
                                     @endif
                                 </div>

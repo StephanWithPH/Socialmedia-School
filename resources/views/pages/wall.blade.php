@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1 class="display-4 text-white font-weight-bold">{{ \Illuminate\Support\Facades\Auth::user()->username }}'s wall</h1>
+                    <h1 class="display-4 text-white font-weight-bold">Wall</h1>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
 
             $.ajax({
                 type:'POST',
-                url:'/post/like',
+                url:'{{ action('WallController@likePost') }}',
                 data:{id:id},
 
                 success:function(data){

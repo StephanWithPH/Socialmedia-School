@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{asset('css/app.scss')}}" rel="stylesheet">
+    <link href="{{asset('fontawesome/css/all.css')}}" rel="stylesheet">
     <!-- CSRF Token Meta Added -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ URL::asset('css/dropify.min.css') }}" />
@@ -25,17 +26,12 @@
 <!-- Google Font Roboto -->
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-<link href="https://db.onlinewebfonts.com/c/ac9525e5f200f57332b3080d0db9d8f6?family=Sailec-Medium" rel="stylesheet" type="text/css"/>
-<link href="https://db.onlinewebfonts.com/c/61b43418b9624db49ba89da5d1b7eec8?family=Sailec-Bold" rel="stylesheet" type="text/css"/>
-<link href="https://db.onlinewebfonts.com/c/2fe381b3d8cf4ee5f331668970d8a65a?family=Sailec-Light" rel="stylesheet" type="text/css"/>
-<!-- FontAwesome -->
-<script src="https://kit.fontawesome.com/c3da043785.js" crossorigin="anonymous"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
 <script>
     $(window).load(function() {
-        $('.preloader').fadeOut(950);
+        $('.preloader').fadeOut(500);
         $('body').removeClass('loading');
     });
 </script>
